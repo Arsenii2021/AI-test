@@ -1,0 +1,5 @@
+- name: Deploy OpenNebula
+  hosts: opennebula_servers
+  become: yes
+  roles:
+    - opennebula
