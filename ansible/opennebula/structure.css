@@ -1,0 +1,13 @@
+ansible/
+├── inventory.ini
+├── playbook.yml
+└── roles/
+    └── opennebula/
+        ├── files/
+        │   └── opennebula.repo
+        ├── tasks/
+        │   └── main.yml
+        ├── templates/
+        │   └── oned.conf.j2
+        └── vars/
+            └── main.yml
