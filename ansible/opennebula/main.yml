@@ -1,0 +1,4 @@
+opennebula_packages:
+  - opennebula
+  - opennebula-sunstone
+  - opennebula-ruby
