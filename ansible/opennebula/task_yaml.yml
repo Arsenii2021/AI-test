@@ -1,0 +1,24 @@
+- name: Install OpenNebula repo
+  copy:
+    src: opennebula.repo
+    dest: /etc/yum.repos.d/opennebula.repo
+
+- name: Install OpenNebula packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ opennebula_packages }}"
+
+- name: Configure OpenNebula
+  template:
+    src: oned.conf.j2
+    dest: /etc/one/oned.conf
+
+- name: Start OpenNebula services
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - opennebula
+    - opennebula-sunstone
