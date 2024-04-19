@@ -1,0 +1,16 @@
+#!/usr/bin/expect -f
+
+# Очистка буфера
+log_user 0
+
+# Запуск установки openssh-client
+spawn apt-get install openssh-client
+
+# Ожидание вопроса о файле конфигурации
+expect "Do you want to continue? \[Y/n\]"
+
+# Отправка ответа "N"
+send -- "N\r"
+
+# Ожидание завершения установки
+expect eof
