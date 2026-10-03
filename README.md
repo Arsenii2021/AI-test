@@ -2,8 +2,6 @@
 
 Инженер: QA, Virtualization, ML, Linux/облако.
 
-Репозиторий — не набор скриптов, а один контур: снимок консоли/UI → CNN → автотест → ONNX/C++ на хосте → стенд OpenNebula. Python, C++, bash, Terraform и Ansible связаны одним сценарием, а не живут отдельно.
-
 **Контакты:** [GitHub](https://github.com/Arsenii2021) · [Hugging Face](https://huggingface.co/spaces/Arsenii2023/Linear_reg) · [elibrary: анализ изображений](https://www.elibrary.ru/item.asp?id=60234536) · [elibrary: автотесты в облачной виртуализации](https://elibrary.ru/item.asp?id=65485768)
 
 ---
