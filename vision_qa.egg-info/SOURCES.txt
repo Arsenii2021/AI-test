@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+tests/test_cli.py
+tests/test_dataset.py
+vision_qa/__init__.py
+vision_qa/__main__.py
+vision_qa/capture.py
+vision_qa/cli.py
+vision_qa/dataset.py
+vision_qa/model.py
+vision_qa/synth.py
+vision_qa.egg-info/PKG-INFO
+vision_qa.egg-info/SOURCES.txt
+vision_qa.egg-info/dependency_links.txt
+vision_qa.egg-info/entry_points.txt
+vision_qa.egg-info/requires.txt
+vision_qa.egg-info/top_level.txt

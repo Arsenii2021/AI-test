@@ -1,0 +1,4 @@
+endpoint      = "http://127.0.0.1:2633/RPC2"
+username      = "oneadmin"
+datastore_id  = 1
+network_start = "192.168.100.10"

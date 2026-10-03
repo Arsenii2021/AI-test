@@ -1,0 +1,2 @@
+[frontends]
+# frontend.example.org ansible_user=root

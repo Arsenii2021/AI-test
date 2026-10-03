@@ -1,0 +1,2 @@
+[console_scripts]
+vision-qa = vision_qa.cli:main

@@ -1,0 +1,12 @@
+numpy>=1.26
+opencv-python-headless>=4.8
+
+[capture]
+selenium>=4.15
+
+[dev]
+pytest>=8.0
+
+[train]
+tensorflow>=2.15
+tf2onnx>=1.16

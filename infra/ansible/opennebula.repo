@@ -1,0 +1,5 @@
+[opennebula]
+name=OpenNebula
+baseurl=https://downloads.opennebula.io/repo/6.8/AlmaLinux/8/x86_64
+enabled=1
+gpgcheck=0

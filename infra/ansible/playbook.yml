@@ -1,0 +1,28 @@
+- name: OpenNebula frontend
+  hosts: frontends
+  become: true
+  vars:
+    opennebula_packages:
+      - opennebula
+      - opennebula-sunstone
+      - opennebula-ruby
+  tasks:
+    - name: Install repository
+      ansible.builtin.copy:
+        src: opennebula.repo
+        dest: /etc/yum.repos.d/opennebula.repo
+        mode: "0644"
+
+    - name: Install packages
+      ansible.builtin.yum:
+        name: "{{ opennebula_packages }}"
+        state: present
+
+    - name: Enable services
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      loop:
+        - opennebula
+        - opennebula-sunstone

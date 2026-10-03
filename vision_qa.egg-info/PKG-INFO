@@ -1,0 +1,68 @@
+Metadata-Version: 2.4
+Name: vision-qa
+Version: 0.2.0
+Summary: CNN-based UI state detection for automated tests of virtualization consoles
+Author: Arsenii Kostenko
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.26
+Requires-Dist: opencv-python-headless>=4.8
+Provides-Extra: train
+Requires-Dist: tensorflow>=2.15; extra == "train"
+Requires-Dist: tf2onnx>=1.16; extra == "train"
+Provides-Extra: capture
+Requires-Dist: selenium>=4.15; extra == "capture"
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+
+# vision-qa
+
+Лабораторный контур **визуального контроля** гостевых консолей и веб-UI в облаке виртуализации (KVM/OpenNebula). Связка повторяет рабочий профиль: Python (Keras/OpenCV), C++/ONNX, bash, Terraform, Ansible, Selenium, pytest.
+
+Конвейер: снимок консоли или страницы → CNN классифицирует состояние (`boot` / `login` / `ready` / `error`) → проверка в автотесте → экспорт ONNX для инференса без Python.
+
+## Стек
+
+| Слой | Код |
+| --- | --- |
+| Датасет и модель | `vision_qa/` |
+| CLI | `python -m vision_qa` |
+| C++ inf | `cpp/infer.cpp` |
+| Стенд VM | `infra/terraform`, `infra/ansible` |
+| Хосты Debian/Ubuntu/Fedora | `infra/bash/host-upgrade.sh` |
+
+## Запуск
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev,train,capture]"
+python -m vision_qa synth
+python -m vision_qa train --epochs 8
+python -m vision_qa infer data/screens/ready/ready_000.png --expect ready
+python -m vision_qa export-onnx
+python -m vision_qa capture --url https://example.com --out /tmp/ui.png
+python -m vision_qa capture --domain guest01 --out /tmp/console.png
+pytest
+```
+
+C++ (нужны OpenCV и [ONNX Runtime](https://github.com/microsoft/onnxruntime)):
+
+```bash
+cmake -S cpp -B cpp/build -DONNXRUNTIME_ROOT=/opt/onnxruntime
+cmake --build cpp/build
+./cpp/build/infer models/ui.onnx /tmp/console.png
+```
+
+OpenNebula:
+
+```bash
+cp infra/terraform/terraform.tfvars.example infra/terraform/terraform.tfvars
+# TF_VAR_password из окружения, не из git
+infra/terraform/apply.sh
+```
+
+## Контекст
+
+- GitHub: [Arsenii2021](https://github.com/Arsenii2021)
+- Hugging Face: [Arsenii2023/Linear_reg](https://huggingface.co/spaces/Arsenii2023/Linear_reg)
+- Статьи: [анализ изображений](https://www.elibrary.ru/item.asp?id=60234536), [автотесты в облачной виртуализации](https://elibrary.ru/item.asp?id=65485768)
